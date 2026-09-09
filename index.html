@@ -6,16 +6,27 @@
     <meta name="theme-color" content="#07020f" />
     <meta
       name="description"
-      content="Ankit Kumar — Full-Stack Developer. A retro-futuristic, scroll-driven portfolio experience."
+      content="Ankit Kumar — Software Developer (Angular / MEAN Stack), Cloud & DevOps Engineer, Data Engineer. A retro-futuristic, scroll-driven portfolio powered by Anime.js."
     />
-    <meta property="og:title" content="Ankit Kumar ✦ Full-Stack Developer" />
-    <meta property="og:description" content="Retro-futuristic, scroll-driven portfolio. Insert coin and scroll." />
-    <meta property="og:image" content="/covers/build-01.jpg" />
+    <meta property="og:title" content="Ankit Kumar ✦ Software Developer · Cloud · DevOps" />
+    <meta property="og:description" content="Bronze-medal developer building scalable Angular apps, cloud automation and full-stack MEAN platforms. Insert coin and scroll." />
+    <meta property="og:image" content="/covers/cloudcanvas.jpg" />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307020f'/%3E%3Crect x='3' y='3' width='58' height='58' rx='12' fill='none' stroke='%23ff2d95' stroke-width='2'/%3E%3Ctext x='32' y='44' font-family='monospace' font-size='30' font-weight='bold' text-anchor='middle' fill='%2300e5ff'%3EAK%3C/text%3E%3C/svg%3E"
     />
-    <title>ANKIT KUMAR ✦ Full-Stack Developer</title>
+    <title>ANKIT KUMAR ✦ Software Developer · Cloud · DevOps</title>
+    <style>
+      /* critical: dark first paint, preloader covers immediately */
+      html { background: #07020f; }
+      body { margin: 0; background: #07020f; color: #f4f0ff; }
+      #preloader {
+        position: fixed; inset: 0; z-index: 6500; background: #07020f;
+        display: grid; place-items: center;
+      }
+      #preloader .pre-inner { width: min(460px, 86vw); text-align: center; }
+      #preloader .pre-logo { color: #00e5ff; letter-spacing: 0.35em; font-size: 0.8rem; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +35,247 @@
     />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- VHS atmosphere -->
+    <div class="fx fx-grain" aria-hidden="true"></div>
+    <div class="fx fx-scan" aria-hidden="true"></div>
+    <div class="fx fx-scanbar" aria-hidden="true"></div>
+    <div class="fx fx-vignette" aria-hidden="true"></div>
+
+    <!-- custom cursor -->
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+    <!-- scroll progress -->
+    <div class="progress-bar" aria-hidden="true"><span id="scroll-progress"></span></div>
+
+    <!-- boot preloader -->
+    <div id="preloader">
+      <div class="pre-inner">
+        <p class="pre-logo mono">AK.EXE</p>
+        <p class="pre-boot mono" id="pre-boot">BOOTING NEON DRIVERS v4.5</p>
+        <div class="pre-bar"><span id="pre-fill"></span></div>
+        <p class="pre-count chrome"><span id="pre-num">000</span><em>%</em></p>
+        <p class="pre-coin mono blink">INSERT COIN</p>
+      </div>
+      <div id="pre-flash" aria-hidden="true"></div>
+    </div>
+
+    <!-- nav -->
+    <header class="nav" id="nav">
+      <button class="nav-logo mono" id="nav-logo" aria-label="Back to top">AK.EXE</button>
+      <nav class="nav-links" id="nav-links" aria-label="Primary">
+        <a href="#about" class="nav-link mono" data-scroll><em>01</em>ABOUT</a>
+        <a href="#skills" class="nav-link mono" data-scroll><em>02</em>SKILLS</a>
+        <a href="#work" class="nav-link mono" data-scroll><em>03</em>QUEST LOG</a>
+        <a href="#projects" class="nav-link mono" data-scroll><em>04</em>BUILDS</a>
+        <a href="#vault" class="nav-link mono" data-scroll><em>05</em>TROPHIES</a>
+        <a href="#contact" class="nav-link mono" data-scroll><em>06</em>CONTACT</a>
+      </nav>
+      <a class="nav-cta mono" href="mailto:ankit.kumar.career9@gmail.com">HIRE ME</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <!-- fullscreen mobile menu -->
+    <div class="menu" id="menu" aria-hidden="true">
+      <nav class="menu-inner" aria-label="Mobile">
+        <a class="menu-link" href="#about" data-scroll><em>01</em><span>ABOUT</span></a>
+        <a class="menu-link" href="#skills" data-scroll><em>02</em><span>SKILLS</span></a>
+        <a class="menu-link" href="#work" data-scroll><em>03</em><span>QUEST LOG</span></a>
+        <a class="menu-link" href="#projects" data-scroll><em>04</em><span>BUILDS</span></a>
+        <a class="menu-link" href="#vault" data-scroll><em>05</em><span>TROPHIES</span></a>
+        <a class="menu-link" href="#contact" data-scroll><em>06</em><span>CONTACT</span></a>
+      </nav>
+      <div class="menu-foot mono">
+        <a href="https://github.com/ankitkumar131" target="_blank" rel="noreferrer">GITHUB ↗</a>
+        <a href="https://www.linkedin.com/in/ankit-kumar-510387270" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+        <a href="mailto:ankit.kumar.career9@gmail.com">EMAIL ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <!-- ══════════ HERO ══════════ -->
+      <section class="hero" id="hero">
+        <div class="hero-sky">
+          <div class="stars" id="stars" aria-hidden="true"></div>
+          <div class="sun" aria-hidden="true"><div class="sun-core"></div></div>
+          <svg class="scene-svg" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="mg-back" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2a1450" />
+                <stop offset="1" stop-color="#0a0418" />
+              </linearGradient>
+              <linearGradient id="mg-front" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#160b32" />
+                <stop offset="1" stop-color="#07020f" />
+              </linearGradient>
+            </defs>
+            <g class="m-fills" opacity="0">
+              <path fill="url(#mg-back)" d="M0 300 L0 214 L96 148 L182 204 L272 118 L364 198 L472 92 L562 184 L668 132 L762 204 L872 108 L982 194 L1082 138 L1182 208 L1282 152 L1372 214 L1440 172 L1440 300 Z" />
+              <path fill="url(#mg-front)" d="M0 300 L0 252 L112 186 L232 246 L342 162 L462 242 L592 130 L702 226 L822 172 L932 246 L1052 152 L1172 242 L1292 186 L1440 256 L1440 300 Z" />
+            </g>
+            <g fill="none" stroke-width="2" stroke-linejoin="round">
+              <path class="m-draw" stroke="#8a5cff" vector-effect="non-scaling-stroke" d="M0 300 L0 214 L96 148 L182 204 L272 118 L364 198 L472 92 L562 184 L668 132 L762 204 L872 108 L982 194 L1082 138 L1182 208 L1282 152 L1372 214 L1440 172 L1440 300 Z" />
+              <path class="m-draw" stroke="#00e5ff" vector-effect="non-scaling-stroke" d="M0 300 L0 252 L112 186 L232 246 L342 162 L462 242 L592 130 L702 226 L822 172 L932 246 L1052 152 L1172 242 L1292 186 L1440 256 L1440 300 Z" />
+            </g>
+          </svg>
+          <div class="hero-horizon" aria-hidden="true"></div>
+        </div>
+        <div class="hero-grid" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <p class="hero-kicker mono">✦ PUNE, MAHARASHTRA ✦ OPEN TO WORK ✦</p>
+          <h1 class="hero-title chrome" id="hero-title" aria-label="Ankit Kumar"></h1>
+          <div class="hero-role mono" aria-hidden="false">
+            <span class="dash" aria-hidden="true"></span>
+            <span class="role-text" id="role-text">SOFTWARE DEVELOPER</span>
+            <span class="dash is-right" aria-hidden="true"></span>
+          </div>
+          <p class="hero-tag" id="hero-tag"></p>
+        </div>
+
+        <div class="hero-rec mono" aria-hidden="true">
+          <span class="rec-dot"></span>REC <span id="timecode">00:00:00:00</span>
+        </div>
+        <div class="hero-scroll mono blink" aria-hidden="true">▼ SCROLL TO INITIALIZE ▼</div>
+        <div class="marquee hero-marquee" id="hero-marquee" aria-hidden="true"></div>
+      </section>
+
+      <!-- ══════════ ABOUT ══════════ -->
+      <section class="section about" id="about">
+        <div class="sec-head">
+          <span class="sec-ghost" aria-hidden="true">ABOUT</span>
+          <p class="sec-no mono">01 //</p>
+          <h2 class="sec-title">WHO'S THIS GUY?</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <p class="sec-note mono">/ a human, probably</p>
+        </div>
+        <div class="about-grid">
+          <div class="terminal" data-hover>
+            <div class="terminal-bar">
+              <span class="tdot red"></span><span class="tdot yellow"></span><span class="tdot green"></span>
+              <span class="terminal-title mono">ankit@portfolio: ~/about</span>
+            </div>
+            <div class="terminal-body mono">
+              <p><span class="t-prompt">$</span> <span class="t-cmd">cat ankit.summary</span></p>
+              <div id="term-lines"></div>
+              <p class="t-cmd-row"><span class="t-prompt">$</span> <span class="t-caret" aria-hidden="true"></span></p>
+            </div>
+          </div>
+          <div class="about-side">
+            <div class="stats-grid" id="stats"></div>
+            <div class="chip-row" id="chips"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════ SKILLS ══════════ -->
+      <section class="section skills" id="skills">
+        <div class="sec-head">
+          <span class="sec-ghost" aria-hidden="true">SKILLS</span>
+          <p class="sec-no mono">02 //</p>
+          <h2 class="sec-title">SKILL TREE</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <p class="sec-note mono">/ no cheat codes used</p>
+        </div>
+        <div class="skills-grid" id="skill-groups"></div>
+        <div class="marquee tools-marquee" id="tools-marquee" aria-hidden="true"></div>
+      </section>
+
+      <!-- ══════════ EXPERIENCE ══════════ -->
+      <section class="section xp" id="work">
+        <div class="sec-head">
+          <span class="sec-ghost" aria-hidden="true">QUEST</span>
+          <p class="sec-no mono">03 //</p>
+          <h2 class="sec-title">MAIN QUEST LOG</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <p class="sec-note mono">/ xp farming since 2024</p>
+        </div>
+        <div class="timeline" id="timeline">
+          <span class="timeline-line" aria-hidden="true"></span>
+          <span class="timeline-progress" id="tl-progress" aria-hidden="true"></span>
+          <div id="tl-items"></div>
+          <p class="tl-end mono blink">// TO BE CONTINUED…</p>
+        </div>
+      </section>
+
+      <!-- ══════════ PROJECTS ══════════ -->
+      <section class="section projects" id="projects">
+        <div class="projects-wrap" id="projects-wrap">
+          <div class="projects-sticky">
+            <div class="projects-head">
+              <div class="sec-head">
+                <span class="sec-ghost" aria-hidden="true">BUILDS</span>
+                <p class="sec-no mono">04 //</p>
+                <h2 class="sec-title">FEATURED BUILDS</h2>
+                <span class="sec-rule" aria-hidden="true"></span>
+                <p class="sec-note mono">/ keep scrolling — it moves sideways</p>
+              </div>
+              <div class="projects-progress" aria-hidden="true">
+                <div class="pp-track"><span id="proj-progress"></span></div>
+                <span class="proj-idx mono" id="proj-idx">01 / 03</span>
+              </div>
+            </div>
+            <div class="projects-scroller" id="projects-scroller" data-lenis-prevent>
+              <div class="projects-track" id="projects-track"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════ TROPHY ROOM ══════════ -->
+      <section class="section vault" id="vault">
+        <div class="sec-head">
+          <span class="sec-ghost" aria-hidden="true">TROPHY</span>
+          <p class="sec-no mono">05 //</p>
+          <h2 class="sec-title">TROPHY ROOM</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <p class="sec-note mono">/ flexing, respectfully</p>
+        </div>
+
+        <h3 class="sub-head mono">// ACHIEVEMENTS UNLOCKED</h3>
+        <div class="trophy-grid" id="trophy-grid"></div>
+
+        <div class="vault-cols">
+          <div class="edu-wrap">
+            <h3 class="sub-head mono">// EDUCATION</h3>
+            <div class="edu-card" id="edu-card" data-hover></div>
+          </div>
+          <div class="certs-wrap">
+            <h3 class="sub-head mono">// CERTIFICATIONS COLLECTED</h3>
+            <div class="certs-grid" id="certs-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════ CONTACT ══════════ -->
+      <section class="section contact" id="contact">
+        <div class="sec-head">
+          <span class="sec-ghost" aria-hidden="true">GG WP</span>
+          <p class="sec-no mono">06 //</p>
+          <h2 class="sec-title">FINAL BOSS: YOUR INBOX</h2>
+          <span class="sec-rule" aria-hidden="true"></span>
+          <p class="sec-note mono">/ no doorbell here</p>
+        </div>
+
+        <div class="contact-inner">
+          <h3 class="contact-big" id="contact-big"></h3>
+          <a class="contact-cta" id="contact-cta" href="mailto:ankit.kumar.career9@gmail.com" data-hover>
+            <span class="cta-text">START A PROJECT</span>
+            <span class="cta-arrow" aria-hidden="true">↗</span>
+          </a>
+          <div class="contact-keys" id="contact-keys"></div>
+        </div>
+
+        <footer class="footer">
+          <div class="marquee footer-marquee" id="footer-marquee" aria-hidden="true"></div>
+          <p class="footer-note mono blink">INSERT COIN TO CONTINUE</p>
+          <p class="footer-legal mono" id="footer-legal"></p>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

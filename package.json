@@ -1,7 +1,7 @@
 {
   "name": "portfolio-motion",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,13 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "gsap": "^3.12.7",
-    "lenis": "^1.1.18",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "animejs": "^4.5.0",
+    "lenis": "^1.1.18"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
     "vite": "^5.4.12"
   }
 }

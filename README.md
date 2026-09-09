@@ -1,42 +1,55 @@
-# ANKIT KUMAR — PORTFOLIO.EXE
+# ANKIT KUMAR — PORTFOLIO.EXE v2
 
-A retro-futuristic, scroll-driven portfolio with a synthwave soul. Chrome text,
-neon grids, VHS grain, and motion on every scroll tick.
+A retro-futuristic, scroll-driven portfolio built from scratch on **Anime.js v4** —
+no frameworks, no React, just vanilla JS, one animation engine, and a synthwave soul.
 
-![stack](https://img.shields.io/badge/React-Vite-61dafb) ![motion](https://img.shields.io/badge/GSAP-ScrollTrigger-88ce02) ![smooth](https://img.shields.io/badge/Lenis-smooth%20scroll-ff2d95)
+![engine](https://img.shields.io/badge/Anime.js-v4%20onScroll-ff2d95) ![stack](https://img.shields.io/badge/Vite-vanilla%20JS-61dafb) ![size](https://img.shields.io/badge/bundle-38KB%20gzipped-88ce02)
 
-## ✦ What's inside
+## ✦ The motion graphics
 
-| Section | Motion |
+Every section is choreographed to the scrollbar via anime.js `onScroll` observers
+(`sync: true` = scrubbed both directions):
+
+| Section | What moves on scroll |
 | --- | --- |
-| **Preloader** | Retro boot sequence — counter, loading bar, flash, curtain lift |
-| **Hero** | Chrome letter-by-letter reveal, striped synthwave sun, animated perspective grid, twinkling stars, parallax on scroll, VHS REC timecode, marquee ticker |
-| **About** | Terminal window that *types* your bio on scroll + animated stat counters |
-| **Skills** | Segmented LED power meters that charge up + reverse marquee of tools |
-| **Experience** | "Main quest log" timeline with a neon progress line scrubbed to scroll |
-| **Projects** | Pinned horizontal gallery scrubbed by vertical scroll (native snap carousel on mobile), 3D tilt cards |
-| **Contact** | Giant chrome CTA, keycap socials, footer marquee |
+| **Preloader** | Boot sequence — 0→100 counter (object tween), glitch flash, curtain lift |
+| **Hero** | SVG mountain ranges **draw themselves** (`svg.createDrawable`), striped sun rises, chrome letters cascade in, scramble role-rotator, VHS REC timecode — then the whole scene parallaxes away, scrubbed |
+| **About** | Terminal that *types* the real resume summary + animated stat counters (1.5+ yrs, 9.13 GPA, 7 certs) |
+| **Skills** | 18 LED power meters charge up as they enter view + a reverse marquee of the full arsenal |
+| **Experience** | "Main quest log" — neon progress line draws itself, scrubbed to scroll position |
+| **Projects** | **Full-viewport panels glide horizontally as you scroll vertically** (sticky + onScroll sync), with a live `01/03` index. Mobile: native snap carousel |
+| **Trophy Room** | Achievements pop in with `outBack` overshoot, 7 certifications flip in (`rotateY`), GPA counts up |
+| **Contact** | Chrome kinetic type, springy CTA, keycap links, footer marquee |
 
-Plus: custom crosshair cursor (desktop), scroll progress bar, film grain + scanlines + rolling scan-bar overlays, hacker text-scramble section headers, mobile fullscreen menu, `prefers-reduced-motion` support.
+Plus: custom crosshair cursor, scroll progress bar, film grain + scanlines + rolling
+scan-bar, `splitText` char reveals on every heading, Lenis buttery smooth scrolling,
+`prefers-reduced-motion` support, responsive from 360px → 4K.
 
 ## ✦ Run it
 
 ```bash
 npm install
 npm run dev      # → http://localhost:5173
-npm run build    # production build in /dist
+npm run build    # production build → /dist (38KB gzipped JS)
 ```
 
 ## ✦ Make it yours
 
-**All content lives in one file: [`src/data/profile.js`](src/data/profile.js)** —
-name, tagline, about lines, stats, skills, experience, projects, socials.
-Edit that file and the whole site re-renders itself.
+**All content lives in [`src/data.js`](src/data.js)** — name, roles, summary, stats,
+skills, experience, projects, trophies, certifications, education, contact links.
+Edit that one file and the entire site re-renders.
 
-Swap cover art in `public/covers/`, fonts via the Google Fonts link in
-`index.html`, and the color palette via CSS custom properties at the top of
-`src/styles/global.css`.
+Cover art lives in `public/covers/`, colors are CSS custom properties at the top of
+[`src/styles/base.css`](src/styles/base.css).
 
-## ✦ Tech
+## ✦ Architecture
 
-React 18 · Vite 5 · GSAP 3 (ScrollTrigger, matchMedia) · Lenis · pure CSS (no UI framework)
+```
+index.html          → full markup + inline SVG synthwave scene
+src/main.js         → boot sequence (Lenis → modules → preloader → hero intro)
+src/data.js         → resume content (single source of truth)
+src/scroll.js       → Lenis smooth-scroll singleton
+src/utils.js        → DOM helpers, scramble, masked char split, marquee builder
+src/js/*.js         → one module per section: render + its scroll choreography
+src/styles/*.css    → base design system + section styles
+```
